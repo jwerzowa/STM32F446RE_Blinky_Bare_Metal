@@ -4,8 +4,8 @@ TOOLCHAIN = arm-none-eabi
 CC = $(TOOLCHAIN)-gcc
 OBJCOPY = $(TOOLCHAIN)-objcopy
 
-SRCS = src/main.c src/startup.s
-OBJS = src/main.o src/startup.o
+SRCS = src/main.c src/startup.s drivers/src/gpio.c drivers/src/rcc.c
+OBJS = src/main.o src/startup.o drivers/src/gpio.o drivers/src/rcc.o
 
 CFLAGS = -mcpu=cortex-m4 \
          -mthumb \
@@ -14,7 +14,9 @@ CFLAGS = -mcpu=cortex-m4 \
          -fdata-sections \
          -ffunction-sections \
          -Wall \
-         -O0 -g
+         -O0 -g \
+         -Idrivers/inc
+
 
 LDFLAGS = -T linker.ld \
           -Wl,--gc-sections \
