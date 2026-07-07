@@ -1,7 +1,4 @@
 
-
-//Instantiate all the addresses, make a structure for each GPIO port, and then make a pointer to each structure.
-
 #include "../inc/gpio.h"
 #include "../inc/rcc.h"
 #include <stdint.h>
@@ -29,4 +26,21 @@ void GPIO_Init(GPIO_TypeDef* port, GPIO_PinConfig* config) {
     port->PUPDR &= ~(3 << config->pin *2);
     port->PUPDR |= (config->pull << config->pin *2);
 
+}
+
+void GPIO_Write(GPIO_TypeDef* port, uint32_t pin, uint8_t value) {
+
+    if(value){
+        port->BSRR = (1 << pin); //Set the pin
+    } else {
+        port->BSRR = (1 << (pin + 16)); //Reset the pin
+    }
+}
+
+void GPIO_Toggle(GPIO_TypeDef* port, uint32_t pin) {
+    port->ODR ^= (1 << pin); //Toggle the pin
+}
+
+uint8_t GPIO_Read(GPIO_TypeDef* port, uint32_t pin) {
+    return port->IDR & (1 << pin);
 }
