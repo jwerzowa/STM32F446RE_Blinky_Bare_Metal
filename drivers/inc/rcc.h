@@ -54,8 +54,10 @@ typedef enum {
     RCC_Error = 1
 } RCC_Status;
 
-RCC_Status RCC_Config(uint32_t frequency);
 
+
+//function declarations
+RCC_Status RCC_Config(uint32_t frequency);
 uint32_t RCC_GetSystemClockFrequency(void);
 
 

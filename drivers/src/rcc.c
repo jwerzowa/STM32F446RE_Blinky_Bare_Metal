@@ -1,6 +1,7 @@
 #include "../inc/rcc.h"
 #include <stdint.h>
 
+#define FLASH_ACR ((volatile uint32_t*)0x40023C00)
 
 //Function to set the frequency of the clock
 //Return enum RCC_OK = 0 if successful, RCC_Error = 1 if not 
@@ -19,6 +20,11 @@ RCC_Status RCC_Config(uint32_t frequency) {
     RCC->RCC_PLLCFGR |= (180 << 6);  // N = 180
     //Main PLL (PLL) division factor for main system clock (0b00 : divide by 2, 0b01 : divide by 4, 0b10 : divide by 6, 0b11 : divide by 8)
     RCC->RCC_PLLCFGR |= (0b00 << 16);   // P = 0 means divide by 2
+
+
+    // Enable instruction cache, data cache, prefetch, and set 5 wait states
+    *FLASH_ACR = (1 << 10) | (1 << 9) | (1 << 8) | 5;
+
 
     //Now enable PLL (Phase Locked Loop) and wait for it to be ready
     RCC->RCC_CR |= (1<<24); // Set PLLON bit

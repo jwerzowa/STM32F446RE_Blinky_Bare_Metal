@@ -4,7 +4,7 @@ Playing around with embedded at register level, building personal drivers for th
 
 Will function as a template for easy prototyping with the board.
 
-Currently working on RCC and GPIO driver.
+Currently implemented simple RCC & GPIO drivers.
 
 Next Drivers to be worked on:
 - SysTick
