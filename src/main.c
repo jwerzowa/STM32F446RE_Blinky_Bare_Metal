@@ -1,5 +1,6 @@
 #include "../drivers/inc/rcc.h"
 #include "../drivers/inc/gpio.h"
+#include "../drivers/inc/systick.h"
 
 void delay(uint32_t count) {
     while(count--);
@@ -22,6 +23,6 @@ int main(void) {
 
     while (1) {
         GPIO_Toggle(GPIOA, 5);
-        delay_ms(500);
+        SysTick_delay(1000);
     }
 }

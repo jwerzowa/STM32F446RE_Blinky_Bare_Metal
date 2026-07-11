@@ -4,8 +4,8 @@ TOOLCHAIN = arm-none-eabi
 CC = $(TOOLCHAIN)-gcc
 OBJCOPY = $(TOOLCHAIN)-objcopy
 
-SRCS = src/main.c src/startup.s drivers/src/gpio.c drivers/src/rcc.c
-OBJS = src/main.o src/startup.o drivers/src/gpio.o drivers/src/rcc.o
+SRCS = src/main.c src/startup.s drivers/src/gpio.c drivers/src/rcc.c drivers/src/systick.c
+OBJS = src/main.o src/startup.o drivers/src/gpio.o drivers/src/rcc.o drivers/src/systick.o
 
 CFLAGS = -mcpu=cortex-m4 \
          -mthumb \
