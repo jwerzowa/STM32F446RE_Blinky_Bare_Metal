@@ -46,6 +46,7 @@ typedef struct {
     GPIO_OutputType output_type;
     GPIO_Speed speed;
     GPIO_Pull pull;
+    uint32_t alternate_function;
 } GPIO_PinConfig;
 
 typedef struct {

@@ -26,6 +26,16 @@ void GPIO_Init(GPIO_TypeDef* port, GPIO_PinConfig* config) {
     port->PUPDR &= ~(3 << config->pin *2);
     port->PUPDR |= (config->pull << config->pin *2);
 
+
+    if (config->mode == GPIO_MODE_ALTERNATE) {
+        if (config->pin < 8) {
+            port->AFRL &= ~(0xF << (config->pin * 4));
+            port->AFRL |= (config->alternate_function << (config->pin * 4));
+        } else {
+            port->AFRH &= ~(0xF << ((config->pin - 8) * 4));
+            port->AFRH |= (config->alternate_function << ((config->pin - 8) * 4));
+        }
+    }
 }
 
 void GPIO_Write(GPIO_TypeDef* port, uint32_t pin, uint8_t value) {
