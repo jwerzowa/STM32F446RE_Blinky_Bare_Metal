@@ -53,6 +53,7 @@ RCC_Status RCC_Config(uint32_t frequency) {
 
 uint32_t RCC_GetSystemClockFrequency(void) {
 
+    
     switch (RCC->RCC_CFGR & (3<<2) >> 2) {
         case 0: return 16000000;   // HSI
         case 1: return 8000000;    // HSE (external crystal, assume 8MHz)

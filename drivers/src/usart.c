@@ -68,3 +68,20 @@ void USART_init(USART_TypeDef* USARTx, USART_Config* config) {
 
  
 }
+
+void USART_transmit(USART_TypeDef* USARTx, uint8_t* data, uint16_t size) {
+
+    for(uint16_t i = 0; i < size; i++) {
+        while(!(USARTx->USART_SR & (1 << 7))); // Wait until TXE is set
+        USARTx->USART_DR = data[i]; // Send data
+    }
+
+}
+
+void USART_receive(USART_TypeDef* USARTx, uint8_t* data, uint16_t size) {
+
+    for(uint16_t i = 0; i < size; i++) {
+        while(!(USARTx->USART_SR & (1<<5)));
+        data[i] = USARTx->USART_DR; // Read data
+    }
+}
